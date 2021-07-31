@@ -18,8 +18,7 @@ export const CMSOnePage = ({ firebaseConfig, codes = [] }) => {
     //
 
     let calc = () => {
-      let urlData = getUrlParams(window.location.search)
-      let { json } = urlData
+      let json = new URLSearchParams(document.location.search).get('json')
 
       if (json) {
         try {
