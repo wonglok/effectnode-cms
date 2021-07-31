@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { firebase, setupFirebase } from '../editor/firebase'
 import { LoginPage } from './LoginPage'
-export function LoginChecker({ firebaseConfig, children }) {
+export function CanvasChecker({ firebaseConfig, children, canvasID = false }) {
   let [state, setState] = useState('ready')
 
   useEffect(() => {
@@ -10,10 +10,27 @@ export function LoginChecker({ firebaseConfig, children }) {
     setupFirebase({ firebaseConfig })
 
     let clean = firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setState('show')
+      //
+      if (canvasID && user) {
+        firebase
+          .database()
+          .ref(`/profile/${user.uid}/canvas/${canvasID}`)
+          .once('value', (snap) => {
+            let val = snap.val()
+            if (val && val.ownerID === user.uid) {
+              setState('show')
+            } else if (val.shareACL[user.uid]) {
+              setState('show')
+            } else {
+              setState('noRights')
+            }
+          })
       } else {
-        setState('needsLogin')
+        if (user) {
+          setState('show')
+        } else {
+          setState('needsLogin')
+        }
       }
     })
 

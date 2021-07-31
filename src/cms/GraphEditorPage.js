@@ -5,7 +5,7 @@ import { ENHtml } from '../editor/ENHtmls'
 import { GraphEditorContent } from '../editor/GraphEditorContent'
 import { Resizer } from '../editor/Resizer'
 import { logout, setupFirebase } from '../editor/firebase'
-import { LoginChecker } from '../auth/LoginChecker'
+import { CanvasChecker } from '../auth/CanvasChecker'
 
 export const GraphEditorPage = ({
   canvasID,
@@ -14,14 +14,14 @@ export const GraphEditorPage = ({
   firebaseConfig
 }) => {
   return (
-    <LoginChecker firebaseConfig={firebaseConfig} canvasID={canvasID}>
+    <CanvasChecker firebaseConfig={firebaseConfig} canvasID={canvasID}>
       <GraphEditorApp
         firebaseConfig={firebaseConfig}
         canvasID={canvasID}
         ownerID={ownerID}
         codes={codes}
       ></GraphEditorApp>
-    </LoginChecker>
+    </CanvasChecker>
   )
 }
 

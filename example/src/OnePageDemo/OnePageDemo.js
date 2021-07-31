@@ -1,15 +1,9 @@
 import React from 'react'
+import { CMSOnePage } from 'effectnode-cms'
 
-import { GraphEditorPage } from 'effectnode-cms'
-
-export const GraphEditorPageDemo = () => {
+export function OnePageDemo() {
   return (
-    <GraphEditorPage
-      firebaseConfig={firebaseConfig}
-      canvasID={`-MdBQtfGPXXPkl-NuEoW`}
-      ownerID={`NGpUixuU0NOkOlmLsLuepkaZxxt1`}
-      codes={getCodes()}
-    />
+    <CMSOnePage firebaseConfig={firebaseConfig} code={getCodes()}></CMSOnePage>
   )
 }
 

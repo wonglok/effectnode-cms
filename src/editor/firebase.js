@@ -1,7 +1,7 @@
 import FIREBASE from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
-import { waitGet } from './ENState'
+// import { waitGet } from './ENState'
 
 export const FireCache = new Map()
 export function setupFirebase({ firebaseConfig }) {
@@ -54,25 +54,18 @@ export function setupFirebase({ firebaseConfig }) {
   return FireCache.get('app')
 }
 
-export const onReady = () => {
+export const onReady = ({ firebaseConfig }) => {
   return new Promise((resolve) => {
-    waitGet('firebaseConfig').then((firebaseConfig) => {
-      setupFirebase({ firebaseConfig })
+    setupFirebase({ firebaseConfig })
 
-      let tt = setInterval(() => {
-        if (FireCache.has('user')) {
-          clearInterval(tt)
-          resolve({
-            firebase: FIREBASE,
-            user: FireCache.get('user'),
-            fire: FireCache.get('app'),
-            db: FireCache.get('database'),
-            logout: () => {
-              return FireCache.get('app').auth().signOut()
-            }
-          })
-        }
-      })
+    let tt = setInterval(() => {
+      if (FireCache.has('user')) {
+        clearInterval(tt)
+        resolve({
+          user: FireCache.get('user'),
+          db: FireCache.get('database')
+        })
+      }
     })
   })
 }
