@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { GraphEditorPage } from '@effectnode/cms'
+import { GraphEditorPage } from 'effectnode-cms'
 
 export const GraphEditorPageDemo = () => {
   return (
