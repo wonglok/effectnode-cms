@@ -25,7 +25,6 @@ export function ENProjectListing({ firebaseConfig, onEdit = () => {} }) {
                 data: val[kn]
               })
             }
-            //
 
             ENState.listing = arr
           }
