@@ -1,10 +1,8 @@
 import React from 'react'
-
-import { ExampleComponent } from '@effectnode/cms'
-import '@effectnode/cms/dist/index.css'
+import { GraphEditorPageDemo } from './GraphEditorPageDemo/GraphEditorPageDemo'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return <GraphEditorPageDemo />
 }
 
 export default App
