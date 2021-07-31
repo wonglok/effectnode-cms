@@ -1,4 +1,4 @@
-# @effectnode/cms
+# effectnode-cms
 
 > Effectnode VFX CMS with firebase
 
@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-npm install --save @effectnode/cms
+npm install --save effectnode-cms
 ```
 
 ## Usage
@@ -15,8 +15,8 @@ npm install --save @effectnode/cms
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from '@effectnode/cms'
-import '@effectnode/cms/dist/index.css'
+import MyComponent from 'effectnode-cms'
+import 'effectnode-cms/dist/index.css'
 
 class Example extends Component {
   render() {
