@@ -24,6 +24,7 @@ export function ENHtml({ codes = [] }) {
         position: 'fixed',
         top: '0px',
         left: '0px',
+        width: `100%`,
         backgroundColor: 'rgba(255,255,255,0.92)'
       }}
     >
@@ -32,10 +33,32 @@ export function ENHtml({ codes = [] }) {
       {ENState.overlay === 'node' && <NodePanel codes={codes}></NodePanel>}
 
       {ENState.overlay === 'addCodeBlock' && (
-        <div className='w-full absolute top-0 left-0 bg-white bg-opacity-95'>
-          <div className='bg-green-400'>
-            <div className='p-3 text-2xl font-serif'>
-              <div className='text-white select-none'>
+        <div
+          style={{
+            width: `100%`,
+            position: 'absolute',
+            top: `0px`,
+            left: `0px`,
+            backgroundColor: 'rgba(255,255,255,0.95)'
+          }}
+        >
+          <div
+            style={{ width: `100%`, backgroundColor: 'rgba(40,255,40,1.0)' }}
+            className='bg-green-400'
+          >
+            <div
+              style={{
+                width: `100%`,
+                padding: '15px',
+                fontSize: '30px',
+                fontFamily: 'Arial'
+              }}
+            >
+              <div
+                style={{
+                  width: `100%`
+                }}
+              >
                 Click on Floor to Add
               </div>
             </div>
@@ -64,7 +87,9 @@ export function ENHtml({ codes = [] }) {
             onPointerDown={() => {
               ENState.overlay = ''
             }}
-            className=' cursor-pointer'
+            style={{
+              cursor: 'pointer'
+            }}
           >
             <path d='M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z' />
           </svg>
@@ -115,7 +140,7 @@ function MainPanel({ codes = [] }) {
           fontFamily: 'Arial'
         }}
       >
-        <div className=''>Add New CodeBlock</div>
+        <div>Add New CodeBlock</div>
       </div>
 
       {nodesTemplates.map((e) => {
@@ -217,7 +242,7 @@ function NodePanel({ codes = [] }) {
           fontFamily: 'Arial'
         }}
       >
-        <div className=''>
+        <div>
           Node using logic:{' '}
           <div
             style={{
