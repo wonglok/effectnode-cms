@@ -59,7 +59,7 @@ export const GraphEditorApp = ({
 
       {okFirebase && okSize && <ENHtml codes={codes}></ENHtml>}
 
-      {okFirebase && (
+      {/* {okFirebase && (
         <div
           //
           style={{
@@ -86,7 +86,7 @@ export const GraphEditorApp = ({
             Logout
           </div>
         </div>
-      )}
+      )} */}
     </div>
   )
 }

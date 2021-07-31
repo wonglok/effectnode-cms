@@ -35,9 +35,9 @@ export const CMSOnePage = ({ firebaseConfig, codes = [] }) => {
           //
           style={{
             position: 'absolute',
-            top: `60px`,
-            right: `0px`,
-            zIndex: '1000'
+            top: `0px`,
+            left: `0px`,
+            zIndex: '1'
           }}
         >
           <div
@@ -54,7 +54,32 @@ export const CMSOnePage = ({ firebaseConfig, codes = [] }) => {
               setSelected(false)
             }}
           >
-            Back ({selected.title})
+            Back
+          </div>
+        </div>
+      )}
+
+      {selected && (
+        <div
+          //
+          style={{
+            position: 'absolute',
+            bottom: `0px`,
+            right: `0px`,
+            zIndex: '1'
+          }}
+        >
+          <div
+            style={{
+              fontSize: '12px',
+              margin: '7px',
+              padding: '7px 15px',
+              background: 'white',
+              cursor: 'pointer',
+              borderRadius: '50px'
+            }}
+          >
+            ({selected.title})
           </div>
         </div>
       )}
@@ -66,7 +91,7 @@ export const CMSOnePage = ({ firebaseConfig, codes = [] }) => {
             position: 'absolute',
             top: `0px`,
             right: `0px`,
-            zIndex: '1000'
+            zIndex: '1'
           }}
         >
           <div

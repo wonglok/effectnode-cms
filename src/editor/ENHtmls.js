@@ -22,6 +22,7 @@ export function ENHtml({ codes = [] }) {
     <div
       style={{
         position: 'fixed',
+        zIndex: '20',
         top: '0px',
         left: '0px',
         width: `100%`,

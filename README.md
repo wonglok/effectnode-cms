@@ -13,15 +13,46 @@ npm install --save effectnode-cms
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React from 'react'
+import { CMSOnePage } from 'effectnode-cms'
 
-import MyComponent from 'effectnode-cms'
-import 'effectnode-cms/dist/index.css'
+export function OnePageDemo() {
+  return (
+    <CMSOnePage firebaseConfig={firebaseConfig} codes={getCodes()}></CMSOnePage>
+  )
+}
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
+export const firebaseConfig = {
+  apiKey: '____YOUR_VERSION____',
+  authDomain: '____YOUR_VERSION____',
+  databaseURL: '____YOUR_VERSION____',
+  projectId: '____YOUR_VERSION____',
+  storageBucket: '____YOUR_VERSION____',
+  messagingSenderId: '____YOUR_VERSION____',
+  appId: '____YOUR_VERSION____',
+  measurementId: '____YOUR_VERSION____'
+}
+
+export const getCodes = () => {
+  let path = require('path')
+  let r = require.context('../vfx-codes', true, /\.js$/, 'lazy')
+
+  function importAll(r) {
+    let arr = []
+    r.keys().forEach((key) => {
+      let filename = path.basename(key)
+
+      arr.push({
+        title: filename,
+        loader: () => r(key)
+      })
+    })
+
+    return arr
   }
+  let codes = importAll(r)
+
+  return codes
 }
 ```
 
