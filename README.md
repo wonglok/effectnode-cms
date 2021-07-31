@@ -23,14 +23,14 @@ export function OnePageDemo() {
 }
 
 export const firebaseConfig = {
-  apiKey: '____YOUR_VERSION____',
-  authDomain: '____YOUR_VERSION____',
-  databaseURL: '____YOUR_VERSION____',
-  projectId: '____YOUR_VERSION____',
-  storageBucket: '____YOUR_VERSION____',
-  messagingSenderId: '____YOUR_VERSION____',
-  appId: '____YOUR_VERSION____',
-  measurementId: '____YOUR_VERSION____'
+  apiKey: '____CHANGE_ME____',
+  authDomain: '____CHANGE_ME____',
+  databaseURL: '____CHANGE_ME____',
+  projectId: '____CHANGE_ME____',
+  storageBucket: '____CHANGE_ME____',
+  messagingSenderId: '____CHANGE_ME____',
+  appId: '____CHANGE_ME____',
+  measurementId: '____CHANGE_ME____'
 }
 
 export const getCodes = () => {
