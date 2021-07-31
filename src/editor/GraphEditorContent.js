@@ -8,6 +8,7 @@ import { ENCore } from './ENCore'
 // import { ENHDRI as ENHdri } from './ENHDRI'
 import { ENDisplayConnectorWire, ENDisplayCursor } from './ENDisplayCursor'
 import { ENDisplayLinks, ENDisplayNodes } from './ENDisplayNodes'
+import { EnvRender } from './EnvRender'
 
 // ENState
 export function GraphEditorContent() {
@@ -26,6 +27,8 @@ export function GraphEditorContent() {
       <ENDisplayCursor></ENDisplayCursor>
 
       <ENDisplayConnectorWire></ENDisplayConnectorWire>
+
+      <EnvRender></EnvRender>
 
       <ambientLight intensity={0.87}></ambientLight>
       <directionalLight

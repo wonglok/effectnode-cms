@@ -67,6 +67,18 @@ export function Laptop({ ...props }) {
       <group position={[0, 7, 1]} rotation-x={Math.PI * -0.25}>
         <Text
           color={'#000000'}
+          fontSize={1.5}
+          maxWidth={200}
+          lineHeight={1}
+          textAlign={'center'}
+          anchorX='center'
+          anchorY='middle'
+          outlineWidth={0.12}
+          outlineColor='#ffffff'
+        >{`Click to start`}</Text>
+
+        {/* <Text
+          color={'#000000'}
           fontSize={1.3}
           maxWidth={200}
           lineHeight={1}
@@ -75,7 +87,7 @@ export function Laptop({ ...props }) {
           anchorY='middle'
           outlineWidth={0.04}
           outlineColor='#ffffff'
-        >{`Click to start`}</Text>
+        >{`Click to start`}</Text> */}
       </group>
     </group>
   )
