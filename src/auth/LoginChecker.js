@@ -25,7 +25,7 @@ export function LoginChecker({ firebaseConfig, children }) {
   }, [])
 
   return (
-    <span>
+    <div className='auto-resize'>
       {state === 'show' && children}
       {state === 'loading' && (
         <div style={{ width: '100%', height: '100%' }}>Loading</div>
@@ -42,7 +42,7 @@ export function LoginChecker({ firebaseConfig, children }) {
       {state === 'noRights' && (
         <div style={{ width: '100%', height: '100%' }}>No Access Rights.</div>
       )}
-    </span>
+    </div>
   )
 }
 

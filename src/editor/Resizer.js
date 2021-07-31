@@ -1,18 +1,29 @@
 import { useEffect } from 'react'
 import { useThree } from '@react-three/fiber'
 
-export function Resizer({ resize, setOKSize }) {
+export function Resizer({ setOKSize }) {
   let three = useThree()
 
   useEffect(() => {
-    if (resize.current) {
-      resize.current.style.width = `${window.innerWidth}px`
-      resize.current.style.height = `${window.innerHeight}px`
+    let sync = () => {
+      let elements = document.querySelectorAll(`.auto-resize`) || []
+      for (let el of elements) {
+        if (el) {
+          el.style.width = `${window.innerWidth}px`
+          el.style.height = `${window.innerHeight}px`
+        }
+      }
     }
+
+    sync()
     setTimeout(() => {
       setOKSize(true)
     })
-  }, [three, three?.size?.width, three?.size?.height, resize.current])
+    window.addEventListener('resize', sync, false)
+    return () => {
+      window.removeEventListener('resize', sync)
+    }
+  }, [three, three?.size?.width, three?.size?.height])
 
   return null
 }

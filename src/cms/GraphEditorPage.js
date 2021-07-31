@@ -48,12 +48,14 @@ export const GraphEditorApp = ({
   return (
     <div
       ref={ref}
+      className='auto-resize'
       style={{ width: `100%`, height: `100%`, position: 'relative' }}
     >
       <Canvas
+        className='auto-resize'
         dpr={(typeof window !== 'undefined' && window.devicePixelRatio) || 1.0}
       >
-        <Resizer setOKSize={setOKSize} resize={ref}></Resizer>
+        <Resizer setOKSize={setOKSize}></Resizer>
         {okFirebase && okSize && <GraphEditorContent></GraphEditorContent>}
       </Canvas>
 

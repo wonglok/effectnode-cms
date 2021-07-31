@@ -3,6 +3,7 @@ import { loginGoogle, setupFirebase, firebase } from '../editor/firebase'
 export function LoginPage({ done, firebaseConfig }) {
   return (
     <div
+      className='auto-resize'
       style={{
         width: `${window.innerWidth}px`,
         height: `${window.innerHeight}px`,
