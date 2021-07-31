@@ -152,7 +152,6 @@ export function ENDisplayConnectorWire() {
       cursorPos.copy(ENState.cursorAt)
 
       if (needsUpdate) {
-        //
         let lineGeo = getGeo({ a: cursorPos, b: dragStartPos, dotted: true })
         mesh.geometry = lineGeo
       }

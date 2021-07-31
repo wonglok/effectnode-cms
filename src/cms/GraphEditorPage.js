@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Canvas, useThree } from '@react-three/fiber'
+import { Canvas } from '@react-three/fiber'
 import { ENState, waitGet } from '../editor/ENState'
 import { ENHtml } from '../editor/ENHtmls'
 import { GraphEditorContent } from '../editor/GraphEditorContent'
-import { setupFirebase } from '../editor/firebase'
+import { Resizer } from '../editor/Resizer'
+import { logout, setupFirebase } from '../editor/firebase'
+import { LoginChecker } from '../auth/LoginChecker'
 
 export const GraphEditorPage = ({
   canvasID,
@@ -11,7 +13,25 @@ export const GraphEditorPage = ({
   codes = [],
   firebaseConfig
 }) => {
-  let [ok, setOK] = useState(false)
+  return (
+    <LoginChecker firebaseConfig={firebaseConfig} canvasID={canvasID}>
+      <GraphEditorApp
+        firebaseConfig={firebaseConfig}
+        canvasID={canvasID}
+        ownerID={ownerID}
+        codes={codes}
+      ></GraphEditorApp>
+    </LoginChecker>
+  )
+}
+
+export const GraphEditorApp = ({
+  canvasID,
+  ownerID,
+  codes = [],
+  firebaseConfig
+}) => {
+  let [okFirebase, setOKFirebase] = useState(false)
   let [okSize, setOKSize] = useState(false)
   useEffect(() => {
     ENState.canvasID = canvasID
@@ -20,7 +40,7 @@ export const GraphEditorPage = ({
 
     waitGet('firebaseConfig').then((firebaseConfig) => {
       setupFirebase({ firebaseConfig })
-      setOK(true)
+      setOKFirebase(true)
     })
   }, [canvasID, ownerID])
 
@@ -33,27 +53,39 @@ export const GraphEditorPage = ({
       <Canvas
         dpr={(typeof window !== 'undefined' && window.devicePixelRatio) || 1.0}
       >
-        {ok && okSize && <GraphEditorContent></GraphEditorContent>}
         <Resizer setOKSize={setOKSize} resize={ref}></Resizer>
+        {okFirebase && okSize && <GraphEditorContent></GraphEditorContent>}
       </Canvas>
 
-      {ok && okSize && <ENHtml codes={codes}></ENHtml>}
+      {okFirebase && okSize && <ENHtml codes={codes}></ENHtml>}
+
+      {okFirebase && (
+        <div
+          //
+          style={{
+            position: 'absolute',
+            top: `0px`,
+            right: `0px`,
+            zIndex: '1000'
+          }}
+        >
+          <div
+            style={{
+              margin: '12px',
+              padding: '12px 25px',
+              background: 'white',
+              cursor: 'pointer',
+              borderRadius: '50px'
+            }}
+            onClick={() => {
+              //
+              logout()
+            }}
+          >
+            Logout
+          </div>
+        </div>
+      )}
     </div>
   )
-}
-
-function Resizer({ resize, setOKSize }) {
-  let three = useThree()
-
-  useEffect(() => {
-    if (resize.current) {
-      resize.current.style.width = `${window.innerWidth}px`
-      resize.current.style.height = `${window.innerWidth}px`
-    }
-    setTimeout(() => {
-      setOKSize(true)
-    })
-  }, [three, resize, resize.current])
-
-  return null
 }

@@ -91,7 +91,6 @@ export function ENDisplayLinks() {
           ENState.connections = arr
 
           setLinks(arr)
-          console.log(arr)
         }
       })
   }, [canvasID, canvasOwnerID])

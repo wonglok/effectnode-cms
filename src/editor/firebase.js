@@ -81,6 +81,10 @@ export const loginGuest = async () => {
   return FIREBASE.auth().signInAnonymously()
 }
 
+export const logout = async () => {
+  return FIREBASE.auth().signOut()
+}
+
 export const loginGoogle = () => {
   var provider = new FIREBASE.auth.GoogleAuthProvider()
   return FIREBASE.auth().signInWithPopup(provider)
