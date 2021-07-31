@@ -4,6 +4,10 @@
 
 [![NPM](https://img.shields.io/npm/v/effectnode-cms.svg)](https://www.npmjs.com/package/effectnode-cms) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+## Screenshot
+
+![alt text](https://github.com/wonglok/effectnode-cms/blob/master/md-img/cms-screenshot.png?raw=true)
+
 ## Install
 
 ```bash
