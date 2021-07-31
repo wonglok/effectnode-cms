@@ -73,6 +73,7 @@ export const GraphEditorApp = ({
             style={{
               margin: '12px',
               padding: '12px 25px',
+              boxShadow: `0px 0px 20px 0px #bababa`,
               background: 'white',
               cursor: 'pointer',
               borderRadius: '50px'

@@ -4,7 +4,7 @@ import { logout } from '../editor/firebase'
 import { ProjectListing } from '../projects/ProjectListing'
 import { GraphEditorPage } from './GraphEditorPage'
 
-export const CMSOnePage = ({ firebaseConfig, codes }) => {
+export const CMSOnePage = ({ firebaseConfig, codes = [] }) => {
   let [selected, setSelected] = useState(false)
   return (
     <LoginChecker firebaseConfig={firebaseConfig}>
@@ -34,8 +34,8 @@ export const CMSOnePage = ({ firebaseConfig, codes }) => {
           //
           style={{
             position: 'absolute',
-            top: `0px`,
-            left: `0px`,
+            top: `60px`,
+            right: `0px`,
             zIndex: '1000'
           }}
         >
@@ -44,7 +44,7 @@ export const CMSOnePage = ({ firebaseConfig, codes }) => {
               margin: '12px',
               padding: '12px 25px',
               background: 'white',
-              boxShadow: `0px 10px 30px 0px #bababa`,
+              boxShadow: `0px 0px 20px 0px #bababa`,
               cursor: 'pointer',
               borderRadius: '50px'
             }}
@@ -74,6 +74,7 @@ export const CMSOnePage = ({ firebaseConfig, codes }) => {
               padding: '12px 25px',
               background: 'white',
               cursor: 'pointer',
+              boxShadow: `0px 0px 20px 0px #bababa`,
               borderRadius: '50px'
             }}
             onClick={() => {

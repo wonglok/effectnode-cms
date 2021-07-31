@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { HashRouter, Switch, Route } from 'react-router-dom'
+import { OnePageDemo } from './OnePageDemo/OnePageDemo'
 
 import { GraphEditorPageDemo } from './GraphEditorPageDemo/GraphEditorPageDemo'
-import { OnePageDemo } from './OnePageDemo/OnePageDemo'
 import { ProjectListingPageDemo } from './ProjectListingPageDemo/ProjectListingPageDemo'
 const App = () => {
   return (
