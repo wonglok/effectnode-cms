@@ -83,7 +83,6 @@ export const loginGuest = async () => {
 
 export const loginGoogle = () => {
   var provider = new FIREBASE.auth.GoogleAuthProvider()
-
   return FIREBASE.auth().signInWithPopup(provider)
 }
 

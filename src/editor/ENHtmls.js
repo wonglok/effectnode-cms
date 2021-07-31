@@ -71,7 +71,8 @@ export function ENHtml({ codes = [] }) {
           style={{
             position: 'absolute',
             top: '20px',
-            right: '20px'
+            right: '20px',
+            zIndex: 10
           }}
         >
           <svg
@@ -80,7 +81,7 @@ export function ENHtml({ codes = [] }) {
             xmlns='http://www.w3.org/2000/svg'
             fillRule='evenodd'
             clipRule='evenodd'
-            fill='white'
+            fill='black'
             onClick={() => {
               ENState.overlay = ''
             }}
