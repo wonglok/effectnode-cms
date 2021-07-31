@@ -13,6 +13,7 @@ export const CMSOnePage = ({ firebaseConfig, codes = [] }) => {
           firebaseConfig={firebaseConfig}
           onEdit={(ev) => {
             setSelected({
+              title: ev.title,
               ownerID: ev.ownerID,
               canvasID: ev.canvasID
             })
@@ -53,7 +54,7 @@ export const CMSOnePage = ({ firebaseConfig, codes = [] }) => {
               setSelected(false)
             }}
           >
-            Back
+            Back ({selected.title})
           </div>
         </div>
       )}

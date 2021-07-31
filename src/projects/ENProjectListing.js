@@ -143,6 +143,7 @@ export function ENProjectListing({ firebaseConfig, onEdit = () => {} }) {
                       //   `/effectnode/editor/${e.data.ownerID}/${e._fid}`
                       // )
                       onEdit({
+                        title: e.data.title,
                         ownerID: e.data.ownerID,
                         canvasID: e._fid
                       })
