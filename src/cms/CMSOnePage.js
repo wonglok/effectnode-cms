@@ -3,13 +3,6 @@ import { LoginChecker } from '../auth/LoginChecker'
 import { logout } from '../editor/firebase'
 import { ProjectListing } from '../projects/ProjectListing'
 import { GraphEditorPage } from './GraphEditorPage'
-function getUrlParams(search) {
-  let hashes = search.slice(search.indexOf('?') + 1).split('&')
-  return hashes.reduce((params, hash) => {
-    let [key, val] = hash.split('=')
-    return Object.assign(params, { [key]: decodeURIComponent(val) })
-  }, {})
-}
 
 export const CMSOnePage = ({ firebaseConfig, codes = [] }) => {
   let [selected, setSelected] = useState(false)

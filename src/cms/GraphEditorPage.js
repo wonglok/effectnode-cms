@@ -4,7 +4,7 @@ import { ENState, waitGet } from '../editor/ENState'
 import { ENHtml } from '../editor/ENHtmls'
 import { GraphEditorContent } from '../editor/GraphEditorContent'
 import { Resizer } from '../editor/Resizer'
-import { logout, setupFirebase } from '../editor/firebase'
+import { setupFirebase } from '../editor/firebase'
 import { CanvasChecker } from '../auth/CanvasChecker'
 
 export const GraphEditorPage = ({
