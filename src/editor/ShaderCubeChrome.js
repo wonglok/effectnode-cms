@@ -26,22 +26,17 @@ import {
 // import { cloneUniforms } from "three/src/renderers/shaders/UniformsUtils.js";
 // import * as dat from '';
 
-class CustomWebGLCubeRenderTarget extends WebGLCubeRenderTarget {
-  constructor(width, height, options) {
-    super(width, height, options)
-    this.ok = true
-  }
-
-  setup(renderer, texture) {
-    this.texture.type = texture.type
-    this.texture.format = texture.format
-    this.texture.encoding = texture.encoding
-
+class CustomWebGLCubeRenderTarget {
+  constructor(width, height, options, texture2D, renderer) {
+    this.width = width
+    this.height = height
+    this.options = options
+    this.renderer = renderer
     var scene = new Scene()
 
     var shader = {
       uniforms: {
-        tEquirect: { value: null }
+        tEquirect: { value: texture2D }
       },
 
       vertexShader: `
@@ -80,25 +75,26 @@ class CustomWebGLCubeRenderTarget extends WebGLCubeRenderTarget {
       blending: NoBlending
     })
 
-    material.uniforms.tEquirect.value = texture
-
     var mesh = new Mesh(new BoxBufferGeometry(5, 5, 5), material)
     scene.add(mesh)
 
-    // var cubeRtt = new WebGLCubeRenderTarget(this.width, {format: RGBFormat, generateMipmaps: true, minFilter: LinearMipmapLinearFilter });
-    var camera = new CubeCamera(1, 100000, this)
+    var cubeRtt = new WebGLCubeRenderTarget(this.width, this.options)
+    let texture = cubeRtt.texture
+    cubeRtt.texture.type = texture.type
+    cubeRtt.texture.format = texture.format
+    cubeRtt.texture.encoding = texture.encoding
 
-    camera.renderTarget = this
-    camera.renderTarget.texture.name = 'CubeCameraTexture'
+    material.uniforms.tEquirect.value = texture2D
 
-    camera.update(renderer, scene)
+    this.texture = texture
+
+    var camera = new CubeCamera(1, 100000, cubeRtt)
+
+    camera.update(this.renderer, scene)
 
     this.compute = () => {
-      camera.update(renderer, scene)
+      camera.update(this.renderer, scene)
     }
-
-    // mesh.geometry.dispose()
-    // mesh.material.dispose()
   }
 }
 
@@ -108,18 +104,26 @@ export class ShaderCubeChrome {
     // console.log(renderer)
     this.renderer = renderer
     this.resX = res
-    this.renderTargetCube = new CustomWebGLCubeRenderTarget(this.resX, {
-      format: RGBFormat,
-      generateMipmaps: true,
-      magFilter: LinearFilter,
-      minFilter: LinearMipmapLinearFilter
-    })
     this.renderTargetPlane = new WebGLRenderTarget(this.resX, this.resX, {
       format: RGBFormat,
       generateMipmaps: true,
       magFilter: LinearFilter,
       minFilter: LinearMipmapLinearFilter
     })
+
+    this.renderTargetCube = new CustomWebGLCubeRenderTarget(
+      this.resX,
+      this.resX,
+      {
+        format: RGBFormat,
+        generateMipmaps: true,
+        magFilter: LinearFilter,
+        minFilter: LinearMipmapLinearFilter
+      },
+      this.renderTargetPlane.texture,
+      renderer
+    )
+
     this.camera = new Camera()
     this.scene = new Scene()
     this.geo = new PlaneBufferGeometry(2, 2, 2, 2)
@@ -259,8 +263,6 @@ export class ShaderCubeChrome {
     this.renderTargetCube.texture.mapping = CubeRefractionMapping
     this.renderTargetCube.texture.mapping = CubeReflectionMapping
     this.renderTargetCube.texture.encoding = sRGBEncoding
-
-    this.renderTargetCube.setup(this.renderer, this.renderTargetPlane.texture)
 
     this.compute = ({ time, computeEnvMap = true }) => {
       uniforms.time.value = time || window.performance.now() * 0.0001
