@@ -89,10 +89,14 @@ export function ENProjectListing({ firebaseConfig, onEdit = () => {} }) {
                     style={{ cursor: 'pointer' }}
                     onClick={() => {
                       //
+
                       copy(
                         `
+
 /* graphTitle: ${e.data.title} */
 /* graphID: ${e._fid} */
+/* ownerID: ${e.data.ownerID} */
+
 `.trim()
                       )
                     }}

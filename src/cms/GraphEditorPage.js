@@ -36,16 +36,6 @@ export const GraphEditorApp = ({
   let [okFirebase, setOKFirebase] = useState(false)
   let [okSize, setOKSize] = useState(false)
   useEffect(() => {
-    console.log(ref.current)
-    ENState.canvasID = canvasID
-    ENState.canvasOwnerID = ownerID
-    ENState.firebaseConfig = firebaseConfig
-
-    waitGet('firebaseConfig').then((firebaseConfig) => {
-      setupFirebase({ firebaseConfig })
-      setOKFirebase(true)
-    })
-
     let setH100 = (q) => {
       try {
         let dom = document.querySelector(q)
@@ -60,6 +50,16 @@ export const GraphEditorApp = ({
     setH100('body')
     setH100('#root')
     setH100('#__next')
+
+    console.log(ref.current)
+    ENState.canvasID = canvasID
+    ENState.canvasOwnerID = ownerID
+    ENState.firebaseConfig = firebaseConfig
+
+    waitGet('firebaseConfig').then((firebaseConfig) => {
+      setupFirebase({ firebaseConfig })
+      setOKFirebase(true)
+    })
   }, [canvasID, ownerID])
 
   return (
@@ -75,35 +75,6 @@ export const GraphEditorApp = ({
       </Canvas>
 
       {okFirebase && okSize && <ENHtml codes={codes}></ENHtml>}
-
-      {/* {okFirebase && (
-        <div
-          //
-          style={{
-            position: 'absolute',
-            top: `0px`,
-            right: `0px`,
-            zIndex: '1000'
-          }}
-        >
-          <div
-            style={{
-              margin: '12px',
-              padding: '12px 25px',
-              boxShadow: `0px 0px 20px 0px #bababa`,
-              background: 'white',
-              cursor: 'pointer',
-              borderRadius: '50px'
-            }}
-            onClick={() => {
-              //
-              logout()
-            }}
-          >
-            Logout
-          </div>
-        </div>
-      )} */}
     </div>
   )
 }

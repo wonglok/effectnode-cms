@@ -3,6 +3,10 @@ import { ENState } from './ENState'
 import { firebase } from './firebase'
 
 export class ENMethods {
+  static reload() {
+    window.dispatchEvent(new window.CustomEvent('change-graph'))
+  }
+
   static addCodeBlock({ point }) {
     ENState.overlay = ''
     ENState.cursorMode = 'ready'
@@ -15,27 +19,36 @@ export class ENMethods {
     let newItem = ref.push()
 
     let nodeID = getID()
-    newItem.set({
-      title: ENState.addNodeTitle,
-      _id: nodeID,
-      position: point.toArray(),
-      inputs: [
-        //
-        { _id: getID(), type: 'input', nodeID },
-        { _id: getID(), type: 'input', nodeID },
-        { _id: getID(), type: 'input', nodeID },
-        { _id: getID(), type: 'input', nodeID },
-        { _id: getID(), type: 'input', nodeID }
-      ],
-      outputs: [
-        //
-        { _id: getID(), type: 'output', nodeID },
-        { _id: getID(), type: 'output', nodeID },
-        { _id: getID(), type: 'output', nodeID },
-        { _id: getID(), type: 'output', nodeID },
-        { _id: getID(), type: 'output', nodeID }
-      ]
-    })
+    newItem
+      .set({
+        title: ENState.addNodeTitle,
+        _id: nodeID,
+        position: point.toArray(),
+        inputs: [
+          //
+          { _id: getID(), type: 'input', nodeID },
+          { _id: getID(), type: 'input', nodeID },
+          { _id: getID(), type: 'input', nodeID },
+          { _id: getID(), type: 'input', nodeID },
+          { _id: getID(), type: 'input', nodeID }
+        ],
+        outputs: [
+          //
+          { _id: getID(), type: 'output', nodeID },
+          { _id: getID(), type: 'output', nodeID },
+          { _id: getID(), type: 'output', nodeID },
+          { _id: getID(), type: 'output', nodeID },
+          { _id: getID(), type: 'output', nodeID }
+        ]
+      })
+      .then(
+        () => {
+          ENMethods.reload()
+        },
+        () => {
+          ENMethods.reload()
+        }
+      )
   }
 
   static saveCodeBlock({ node }) {
@@ -45,7 +58,14 @@ export class ENMethods {
         `/canvas/${ENState.canvasID}/${ENState.canvasOwnerID}/nodes/${node._fid}`
       )
 
-    ref.set(node.data)
+    ref.set(node.data).then(
+      () => {
+        ENMethods.reload()
+      },
+      () => {
+        ENMethods.reload()
+      }
+    )
   }
 
   static removeCodeBlockByID({ nodeID }) {
@@ -55,7 +75,14 @@ export class ENMethods {
         `/canvas/${ENState.canvasID}/${ENState.canvasOwnerID}/nodes/${nodeID}`
       )
 
-    ref.remove()
+    ref.remove().then(
+      () => {
+        ENMethods.reload()
+      },
+      () => {
+        ENMethods.reload()
+      }
+    )
   }
 
   static addLink({ input, output }) {
@@ -65,11 +92,20 @@ export class ENMethods {
 
     let newItem = ref.push()
 
-    newItem.set({
-      _id: getID(),
-      input,
-      output
-    })
+    newItem
+      .set({
+        _id: getID(),
+        input,
+        output
+      })
+      .then(
+        () => {
+          ENMethods.reload()
+        },
+        () => {
+          ENMethods.reload()
+        }
+      )
   }
 
   static removeLinkByID({ linkID }) {
@@ -79,7 +115,14 @@ export class ENMethods {
         `/canvas/${ENState.canvasID}/${ENState.canvasOwnerID}/connections/${linkID}`
       )
 
-    ref.remove()
+    ref.remove().then(
+      () => {
+        ENMethods.reload()
+      },
+      () => {
+        ENMethods.reload()
+      }
+    )
   }
 
   static removeCurrentNodeAndConnections() {
