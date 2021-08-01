@@ -3,7 +3,12 @@ import { CMSOnePage } from 'effectnode-cms'
 
 export function OnePageDemo() {
   return (
-    <CMSOnePage firebaseConfig={firebaseConfig} codes={getCodes()}></CMSOnePage>
+    <div style={{ height: '100%' }}>
+      <CMSOnePage
+        firebaseConfig={firebaseConfig}
+        codes={getCodes()}
+      ></CMSOnePage>
+    </div>
   )
 }
 

@@ -41,26 +41,27 @@ export function CanvasChecker({ firebaseConfig, children, canvasID = false }) {
     }
   }, [])
 
-  return (
-    <span>
-      {state === 'show' && children}
-      {state === 'loading' && (
-        <div style={{ width: '100%', height: '100%' }}>Loading</div>
-      )}
-      {state === 'needsLogin' && (
-        <LoginPage
-          done={() => {
-            //
-            setState('show')
-          }}
-          firebaseConfig={firebaseConfig}
-        ></LoginPage>
-      )}
-      {state === 'noRights' && (
-        <div style={{ width: '100%', height: '100%' }}>No Access Rights.</div>
-      )}
-    </span>
-  )
+  if (state === 'show') {
+    return children
+  } else if (state === 'loading') {
+    return <div style={{ width: '100%', height: '100%' }}>Loading</div>
+  } else if (state === 'needsLogin') {
+    return (
+      <LoginPage
+        done={() => {
+          //
+          setState('show')
+        }}
+        firebaseConfig={firebaseConfig}
+      ></LoginPage>
+    )
+  } else if (state === 'noRights') {
+    return (
+      <div style={{ width: '100%', height: '100%' }}>No Access Rights.</div>
+    )
+  } else {
+    return null
+  }
 }
 
 /*

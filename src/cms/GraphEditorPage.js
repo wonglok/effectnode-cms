@@ -31,9 +31,12 @@ export const GraphEditorApp = ({
   codes = [],
   firebaseConfig
 }) => {
+  let ref = useRef()
+
   let [okFirebase, setOKFirebase] = useState(false)
   let [okSize, setOKSize] = useState(false)
   useEffect(() => {
+    console.log(ref.current)
     ENState.canvasID = canvasID
     ENState.canvasOwnerID = ownerID
     ENState.firebaseConfig = firebaseConfig
@@ -42,17 +45,29 @@ export const GraphEditorApp = ({
       setupFirebase({ firebaseConfig })
       setOKFirebase(true)
     })
+
+    let setH100 = (q) => {
+      try {
+        let dom = document.querySelector(q)
+        if (dom) {
+          dom.style.height = '100%'
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    setH100('html')
+    setH100('body')
+    setH100('#root')
+    setH100('#__next')
   }, [canvasID, ownerID])
 
-  let ref = useRef()
   return (
     <div
       ref={ref}
-      className='auto-resize'
       style={{ width: `100%`, height: `100%`, position: 'relative' }}
     >
       <Canvas
-        className='auto-resize'
         dpr={(typeof window !== 'undefined' && window.devicePixelRatio) || 1.0}
       >
         <Resizer setOKSize={setOKSize}></Resizer>

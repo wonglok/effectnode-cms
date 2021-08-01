@@ -5,8 +5,6 @@ export function LoginPage({ done, firebaseConfig }) {
     <div
       className='auto-resize'
       style={{
-        width: `${window.innerWidth}px`,
-        height: `${window.innerHeight}px`,
         display: `flex`,
         alignItems: 'center',
         justifyContent: 'center',
