@@ -8,7 +8,6 @@ import {
   NoBlending,
   BoxBufferGeometry,
   CubeCamera,
-  Color,
   LinearMipmapLinearFilter,
   RGBFormat,
   LinearFilter,
@@ -132,7 +131,7 @@ class CustomWebGLCubeRenderTarget {
 }
 
 export class ShaderCubeChrome {
-  constructor({ renderer, res = 128, color = new Color('#ffffff') }) {
+  constructor({ renderer, res = 128 }) {
     this.renderer = renderer
     this.resX = res
 
