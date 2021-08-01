@@ -8,23 +8,18 @@ export function EnvRender() {
   let rainbow = useMemo(() => {
     let rainbow = new ShaderCubeChrome({
       renderer: get().gl,
-      res: 64,
+      res: 128,
       color: new Color('#ffffff')
     })
 
-    rainbow.compute({ time: 0.54, computeEnvMap: true })
+    rainbow.compute()
 
     get().scene.environment = rainbow.out.envMap
     return rainbow
   }, [])
 
-  let time = 0
-  useFrame((st, dt) => {
-    if (dt >= 1 / 30) {
-      dt = 1 / 30
-    }
-    time += dt
-    rainbow.compute({ time: time, computeEnvMap: true })
+  useFrame(() => {
+    rainbow.compute()
   })
 
   return null
